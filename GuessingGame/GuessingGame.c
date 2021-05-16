@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+const int minChances = 1, maxChances = 100;
+
 int points = 1000;
 int userGuess = 0, secretNumber = 0;
 
@@ -15,7 +17,6 @@ int main() {
 	chances = NumberOfChances();
 
 	secretNumber = RandomNumber(0, 10 * chances);
-	printf("Secret number: %i\n", secretNumber);
 
 	printf("The secret number is between %i and %i.\n", 0, 10 * chances);
 
@@ -71,14 +72,16 @@ int GetUserGuess() {
 /// return the number of chances the user want to have with a minimum of 1, max of 10 or -1 for ifinite tries
 /// </summary>
 int NumberOfChances() {
-	printf("Choose how many chances you want for you to guess the secret number.\n(min 1 | max 10 | -1 for infinite tries).\n");
+	printf("Choose how many chances you want for you to guess the secret number.\n");
+	printf("(min %i | max %i | -1 for infinite tries).\n", minChances, maxChances);
 	printf("Remember, the difficulty will raise with the ammount of chances you got.\n");
 
 	int chances = 0;
 	scanf_s("%i", &chances);
 
-	if (chances > 10) chances = 10;
+	if (chances > maxChances) chances = maxChances;
 	else if (chances < -1) chances = -1;
+	else chances = 1;
 
 	return chances;
 }
