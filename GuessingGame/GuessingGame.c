@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 int points = 1000;
 int userGuess = 0, secretNumber = 0;
@@ -13,6 +15,7 @@ int main() {
 	chances = NumberOfChances();
 
 	secretNumber = RandomNumber(0, 10 * chances);
+	printf("Secret number: %i\n", secretNumber);
 
 	printf("The secret number is between %i and %i.\n", 0, 10 * chances);
 
@@ -32,9 +35,7 @@ int main() {
 			printf("You lost!\n");
 	}
 
-	printf("Game Over!\n");
-
-	printf("You finished the game with %i", points);
+	printf("You finished the game with %i\n", points);
 
 	return 0;
 }
@@ -43,7 +44,6 @@ int main() {
 /// return 0 if the user input was equal, 0 if it was lower and 1 if it was highier then the secret number
 /// </summary>
 int GetUserGuess() {
-	unsigned int pointsToLose = (secretNumber-userGuess)/2;
 	printf("Guess a number: \n");
 	scanf_s("%i", &userGuess);
 
@@ -52,7 +52,11 @@ int GetUserGuess() {
 		return 0;
 	}
 
-	points -= pointsToLose*10;
+	int pointsToLose = (((secretNumber - userGuess) / 2) * 10);
+	if (pointsToLose < 0) points += pointsToLose;
+	else points -= pointsToLose;
+
+	if (points < 0) points = 0;
 
 	if (userGuess < secretNumber) {
 		printf("Your guess was too low.\n\n");
@@ -83,6 +87,7 @@ int NumberOfChances() {
 /// return a random number between a min and max value
 /// </summary>
 int RandomNumber(int min, int max) {
+	srand(time(0));
 	int r = rand() % max + min;
 	return r;
 }
