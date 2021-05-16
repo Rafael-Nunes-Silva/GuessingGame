@@ -1,2 +1,2 @@
 # GuessingGame
-GuessingGame is a guessing game where the user have to trie to guess a secret number randomly generated, finishing the game with as close as possible to 1000 points.
+GuessingGame is a guessing game where the user tries to guess a randomly generated number, finishing the game with as close as possible to 1000 points.
