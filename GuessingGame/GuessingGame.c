@@ -40,6 +40,8 @@ int main() {
 
 	printf("You finished the game with %i\n", points);
 
+	scanf_s("");
+
 	return 0;
 }
 
