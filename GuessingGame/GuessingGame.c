@@ -40,7 +40,14 @@ int main() {
 
 	printf("You finished the game with %i\n", points);
 
-	scanf_s("");
+	printf("Wanna play again? (Y) (N)\n");
+	char restart = ' ';
+	scanf_s(" %c", &restart);
+	restart = toupper(restart);
+	if (toupper(restart) == 'Y') {
+		system("cls");
+		main();
+	}
 
 	return 0;
 }
