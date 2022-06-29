@@ -18,7 +18,7 @@ int main() {
 
 	secretNumber = RandomNumber(0, 10 * chances);
 
-	printf("The secret number is between %i and %i.\n", 0, 10 * chances);
+	printf("The secret number is between %i and %i.\n", 0, chances * 10);
 
 	if (chances == -1) {
 		while (userGuess != secretNumber)
@@ -32,8 +32,10 @@ int main() {
 
 			printf("Chances left: %i\n", chances - turn);
 		}
-		if (userGuess != secretNumber)
+		if (userGuess != secretNumber) {
 			printf("You lost!\n");
+			printf("The number was %i\n", secretNumber);
+		}
 	}
 
 	printf("You finished the game with %i\n", points);
@@ -49,7 +51,7 @@ int GetUserGuess() {
 	scanf_s("%i", &userGuess);
 
 	if (userGuess == secretNumber) {
-		printf("Congratulations! you won!\n\n");
+		printf("Congratulations! You won!\n\n");
 		return 0;
 	}
 
@@ -79,9 +81,10 @@ int NumberOfChances() {
 	int chances = 0;
 	scanf_s("%i", &chances);
 
-	if (chances > maxChances) chances = maxChances;
-	else if (chances < -1) chances = -1;
-	else chances = 1;
+	if (chances > maxChances)
+		chances = maxChances;
+	else if (chances < -1)
+		chances = -1;
 
 	return chances;
 }
